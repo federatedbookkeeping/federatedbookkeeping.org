@@ -2,68 +2,84 @@
 <html>
   <head>
     <title>Federated Bookkeeping</title>
+    <style>
+      body { background-color: #6e0872 }
+      header { width: 40em; margin: 5em auto; color: rgb(223, 240, 248); text-align: center; padding:2em;}
+      article { width: 40em; margin: 5em auto; padding: 1em; border-radius: .1em; background-color: rgb(223, 240, 248) }
+      article p img { width: 100% }
+      footer { width: 40em; margin: 5em auto; color: rgb(223, 240, 248) }
+    </style>
   </head>
   <body>
-    <h2>Federated Bookkeeping</h2>
-    <h3>Definition</h3>
-    <p>Federated Bookkeeping is the technique of electronically linking two or more bookkeeping systems,
-      in such a way that accounts, purchase orders, invoices, tax statements, etc. stay in sync without
-      the need to go through the traditional export and send process at one system, followed by the receive
-      and import process at the other system.
-    </p>
-    <h3>World Ledger Gossip</h3>
-    <p>One approach to federated bookkeeping is world ledger gossip: nodes in the network gossip with each other
-      about transactions that happen between parties, and that together make up the world ledger. Each node has
-      only a partial view of the world ledger, so unlike in blockchain systems, no complete consensus is reached
-      (see also how gossip is used in for instance <a href="https://holochain.org">HoloChain</a> and
-      <a href="https://scuttlebutt.nz/">ScuttleButt</a>).</p>
+    <header>
+      <h1>Federated Bookkeeping</h1>
+    </header>
+    <article>
+      <h3>Definition</h3>
+      <p>Federated Bookkeeping is the technique of electronically linking two or more bookkeeping systems,
+        in such a way that accounts, purchase orders, invoices, tax statements, etc. stay in sync without
+        the need to go through the traditional export and send process at one system, followed by the receive
+        and import process at the other system.
+      </p>
+    </article>
+    <article>
+      <h3>World Ledger Gossip</h3>
+      <p>One approach to federated bookkeeping is world ledger gossip: nodes in the network gossip with each other
+        about transactions that happen between parties, and that together make up the world ledger. Each node has
+        only a partial view of the world ledger, so unlike in blockchain systems, no complete consensus is reached
+        (see also how gossip is used in for instance <a href="https://holochain.org">HoloChain</a> and
+        <a href="https://scuttlebutt.nz/">ScuttleButt</a>).</p>
 
-    <p>The events this gossip reports on would have to be modeled in such a way that they can be meaningfully
-      compared and interrelated, so although it's always hard to pick a model and not end up bikeshedding about it,
-      a transaction on the world ledger would probably have the mandatory fields
-      "id", "from", "to", "date", by which transactions can be uniquely identified, located, and partially ordered on the world ledger.
-      When gossiping about a transaction between accounts at different network nodes, there will often be two representations of it: one
-      at the sending node and one at the receiving node.</p>
+      <p>The events this gossip reports on would have to be modeled in such a way that they can be meaningfully
+        compared and interrelated, so although it's always hard to pick a model and not end up bikeshedding about it,
+        a transaction on the world ledger would probably have the mandatory fields
+        "id", "from", "to", "date", by which transactions can be uniquely identified, located, and partially ordered on the world ledger.
+        When gossiping about a transaction between accounts at different network nodes, there will often be two representations of it: one
+        at the sending node and one at the receiving node.</p>
 
-    <p>Sometimes these are called two transactions (one on each account statement) that
-      together represent a transfer. In this context we don't model the account statement entries as objects in their own right; instead,
-      they are both a form of gossip about one single event (one transaction from Alice to Bob, or equivalently, one transfer from Alice to Bob).</p>
+      <p>Sometimes these are called two transactions (one on each account statement) that
+        together represent a transfer. In this context we don't model the account statement entries as objects in their own right; instead,
+        they are both a form of gossip about one single event (one transaction from Alice to Bob, or equivalently, one transfer from Alice to Bob).</p>
 
-    <p>A multi-hop chain of transactions (hops, transfers) is sometimes called a single transaction; for instance
-      <a href="https://interledger.org">Interledger</a> assumes all transactions are multi-hop chains of local ledger transactions which
-    themselves are called (single hop) transfers, to distinguish them from (multi-hop) transactions. But since in current-day accounting
-    multi-hop is still an exception, on this website, we'll use the word "transaction"
-    to indicate a single hop, and use a word like "chain", "loop" or "cycle" to indicate when these transaction are linked into a multi-hop
-    or circular group.</p>
+      <p>A multi-hop chain of transactions (hops, transfers) is sometimes called a single transaction; for instance
+        <a href="https://interledger.org">Interledger</a> assumes all transactions are multi-hop chains of local ledger transactions which
+      themselves are called (single hop) transfers, to distinguish them from (multi-hop) transactions. But since in current-day accounting
+      multi-hop is still an exception, on this website, we'll use the word "transaction"
+      to indicate a single hop, and use a word like "chain", "loop" or "cycle" to indicate when these transaction are linked into a multi-hop
+      or circular group.</p>
 
-    <p>Without a global view of the ledger it would be impossible to calculate a global balance, but using optional fields "amount / unit"
-      and "state" (confirmed, proposed, declined, etcetera) would allow the calculation of a local payable / receivable / current balance,
-      like in <a href="https://michielbdejong.com/blog/20.html">SNAP</a>. With fields like "description" or "data", transactions could be
-      linked to off-ledger events, and transactions could also link to each other on-ledger to establish a complete ordering of accepted
-      transactions, and/or to indicate when two hop transactions form part of the same multi-hop chain or cycle.
-    </p>
-    <p>Apart from transactions, a bookeeping system would generally also model Purchase Orders, Invoices, Cost Centers, Loans, Mortgages,
-      Shipments, Stock, etcetera. If a supplier and a customer both have a bookkeeping system (most companies and even many individuals do
-      have a bookkeeping system of some sort), then they can federate their bookkeeping systems
-      ('<a href="https://connectyourbooks.com">connect their books</a>') to make changes in
-      one system immediately show up in the other system, thereby greatly reducing the friction and miscommunication in everyday trade.</p>
-    <p>Since Federated Bookkeeping is not in itself a digital asset, participation in <a href="https://bookkeeping.network">the world-wide
-      bookkeeping network</a> does not require a Money Transfer Agent license.</p>
-
-    <h3>Implementations</h3>
-    <p>Solid's <a href="https://github.com/solid/money-pane">MoneyPane</a> is a first implementation of a
-      simplistic bookkeeping system that supports Federated Bookkeeping. It is still under construction.
-      The design consists of several components:
-      <ul>
-        <li>Ledger, using Synchronized Network Accounting Protocol (SNAP)</li>
-        <li>Synchronized Purchase Orders</li>
-        <li>Synchronized Invoices</li>
-      </ul>
-    </p>
-    <h3>Discussion</h3>
-    <p>See the <a href="https://groups.google.com/g/network-money">Network Money</a> mailing list for a discussion forum
-    around the topic of Federated Bookkeeping.</p>
-    <p>See the <a href="https://github.com/michielbdejong/federatedbookkeeping.org">GitHub repo for this website</a> if you
-    want to propose changes to the HTML content of this website.</p>
+      <p>Without a global view of the ledger it would be impossible to calculate a global balance, but using optional fields "amount / unit"
+        and "state" (confirmed, proposed, declined, etcetera) would allow the calculation of a local payable / receivable / current balance,
+        like in <a href="https://michielbdejong.com/blog/20.html">SNAP</a>. With fields like "description" or "data", transactions could be
+        linked to off-ledger events, and transactions could also link to each other on-ledger to establish a complete ordering of accepted
+        transactions, and/or to indicate when two hop transactions form part of the same multi-hop chain or cycle.
+      </p>
+      <p>Apart from transactions, a bookeeping system would generally also model Purchase Orders, Invoices, Cost Centers, Loans, Mortgages,
+        Shipments, Stock, etcetera. If a supplier and a customer both have a bookkeeping system (most companies and even many individuals do
+        have a bookkeeping system of some sort), then they can federate their bookkeeping systems
+        ('<a href="https://connectyourbooks.com">connect their books</a>') to make changes in
+        one system immediately show up in the other system, thereby greatly reducing the friction and miscommunication in everyday trade.</p>
+      <p>Since Federated Bookkeeping is not in itself a digital asset, participation in <a href="https://bookkeeping.network">the world-wide
+        bookkeeping network</a> does not require a Money Transfer Agent license.</p>
+    </article>
+    <article>  
+      <h3>Implementations</h3>
+      <p>Solid's <a href="https://github.com/solid/money-pane">MoneyPane</a> is a first implementation of a
+        simplistic bookkeeping system that supports Federated Bookkeeping. It is still under construction.
+        The design consists of several components:
+        <ul>
+          <li>Ledger, using Synchronized Network Accounting Protocol (SNAP)</li>
+          <li>Synchronized Purchase Orders</li>
+          <li>Synchronized Invoices</li>
+        </ul>
+      </p>
+    </article>
+    <article>  
+      <h3>Discussion</h3>
+      <p>See the <a href="https://groups.google.com/g/network-money">Network Money</a> mailing list for a discussion forum
+      around the topic of Federated Bookkeeping.</p>
+      <p>See the <a href="https://github.com/michielbdejong/federatedbookkeeping.org">GitHub repo for this website</a> if you
+      want to propose changes to the HTML content of this website.</p>
+    </article>
   </body>
 </html>
