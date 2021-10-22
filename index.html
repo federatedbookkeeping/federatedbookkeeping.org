@@ -3,23 +3,18 @@
   <head>
     <title>Federated Bookkeeping</title>
     <style>
-      body { background-color: #4e0252 }
-      header { width: 40em; margin: 5em auto; color: rgb(253, 243, 104); text-align: center; padding:2em;}
-      article { width: 40em; margin: 5em auto; padding: 1em; border-radius: .2em; background-color: rgb(253, 249, 186) }
+      body { background-color: rgb(18, 21, 54) }
+      header { text-align: center;}
+      header img { width: 40em; border-radius: 1em; padding: 5em;}
+      article { width: 40em; margin: 5em auto; padding: 1em; border-radius: 1em; background-color: rgb(255, 253, 206) }
       article p img { width: 100% }
     </style>
   </head>
   <body>
     <header>
-      <h1>Federated Bookkeeping</h1>
+      <img src="logo.jpg">
     </header>
     <article>
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-    room: 'federatedbookkeeping/community'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
       <h3>Definition</h3>
       <p>Federated Bookkeeping is the vision of connecting existing bookkeeping systems together.
         It uses peer-to-peer messages to connect economic agents, independent of any central
@@ -41,6 +36,40 @@
         price signals carried in payments.
         They allow coordination of
         trade, cooperation, trust, credit, production triggers, and footprint reduction.
+      </p>
+    </article>
+
+    <article>
+      <h3>Advantages</h3>
+      <p>
+        A common (status quo) situation for a business organisation or a human being is to use a mix between human memory and regular (non-federated) bookkeeping
+        to keep track of value flows, and then to use monetary payments to settle these flows.
+        Federated bookkeeping has several advantages over this.
+      </p>
+      <h4>Automation</h4>
+      <p>In the short term, organisations and individuals who adopt federated bookkeeping (for instannce, e-invoicing, federated timesheets) can get paid faster,
+        reduce errors, and reduce effort / personnel costs. The federation protocols take over tedious work from communication flows that would currently involve
+        human work and manual data entry.
+      </p>
+      <h4>Conscious Business</h4>
+      <p>
+        In the medium term, having more real-time data about the source and after-sales of your business will make you more conscious of the footprint of your actions.
+        This will hopefully lead to more informed, conscious and harmonious decisions around the social and environmental impact of business activities.
+      </p>
+      <h4>Mutual credit</h4>
+      <p>
+        Shareholders generally want return on investment without too much consideration of what economists call "externalities".
+        In the long term, more transparency can lead to more trust in the supply chain, more supplier credit, More mutual credit means less financial loans and less
+        shareholder primacy, meaning the team working on a project has more freedom to take conscious business decisions without referring to monetary profit as the
+        ultimate goal of any activity. Federated Bookkeeping can therefore be a tool that helps the Degrowth transition.
+      </p>
+      <h4>Decentralisation of Power</h4>
+      <p>
+        Centralised power can lead to monopolies and rent extraction. Federated data architectures
+        (Personal Data Stores, Personal Cloud Servers, Federated Social Web, Federated Bookkeeping)
+        are therefore preferable over centralised data architectures. Even community currencies are generally administered by single-instance computer systems
+        and could (as <a href="https://michielbdejong.com/blog/21.html">Ryan Fugger already proposed</a> long ago) be replaced with federated (multi-instance)
+        computer systems.
       </p>
     </article>
 
@@ -158,5 +187,11 @@
       <p>See the <a href="https://github.com/michielbdejong/federatedbookkeeping.org">GitHub repo for this website</a> if you
       want to propose changes to the HTML content of this website.</p>
     </article>
+    <script>
+      ((window.gitter = {}).chat = {}).options = {
+        room: 'federatedbookkeeping/community'
+      };
+    </script>
+    <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
   </body>
 </html>
